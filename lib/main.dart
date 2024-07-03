@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'body.dart';
+
 void main() {
   runApp(const InstaCloneApp());
 }
@@ -17,15 +19,35 @@ class InstaCloneApp extends StatelessWidget {
           primary: Colors.white,
           secondary: Colors.black,
         ),
-        useMaterial3: true
+        useMaterial3: true,
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          selectedItemColor: Colors.black
+      )
       ),
       home: InstaCloneHome(),
     );
   }
 }
 
-class InstaCloneHome extends StatelessWidget {
+class InstaCloneHome extends StatefulWidget {
   const InstaCloneHome({super.key});
+
+  @override
+  State<InstaCloneHome> createState() => _InstaCloneHomeState();
+}
+
+class _InstaCloneHomeState extends State<InstaCloneHome> {
+
+  late int index;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    index = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +58,31 @@ class InstaCloneHome extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: (){
-                print(object)
-              }, 
-              icon: Icon(Icons.favorite_outline)
+                print("tab Favorite");
+              },
+              icon: Icon(Icons.favorite_outline, size: 32,)
           ),
           IconButton(
-              onPressed: (){},
-              icon: Icon(CupertinoIcons.paperplane)
+              onPressed: (){
+                print("tab DM");
+              },
+              icon: Icon(CupertinoIcons.paperplane, size: 32,)
           ),
         ],
       ),
-      body: Placeholder(),
+      body: InstaBody(index: index),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: index,
+        onTap: (newIndex){
+          setState(() {
+            index = newIndex;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home, size: 28,), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.search, size: 28,), label: "Search")
+        ],
+      ),
     );
   }
 }
