@@ -52,7 +52,8 @@ class _InstaCloneHomeState extends State<InstaCloneHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      //어느 화면을 선택 하느냐에 따라 앱바를 어떻게 해줄 것인지
+      appBar: index == 0 ?AppBar(
         title: Text("Instagram", style: GoogleFonts.lobsterTwo(fontSize: 32),),
         centerTitle: false,
         actions: [
@@ -69,7 +70,7 @@ class _InstaCloneHomeState extends State<InstaCloneHome> {
               icon: Icon(CupertinoIcons.paperplane, size: 32,)
           ),
         ],
-      ),
+      ) : null,
       body: InstaBody(index: index),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: index,
