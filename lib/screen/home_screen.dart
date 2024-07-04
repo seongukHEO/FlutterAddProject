@@ -118,6 +118,7 @@ class FeedItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
@@ -139,6 +140,59 @@ class FeedItem extends StatelessWidget {
               Icon(Icons.more_vert)
             ],
           ),
+        ),
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 10),
+          width: double.infinity,
+          height: 500,
+          color: Colors.indigo.shade300,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                IconButton(
+                    onPressed: (){
+
+                    },
+                    icon: Icon(Icons.favorite_outline)
+                ),
+                IconButton(
+                    onPressed: (){
+
+                    },
+                    icon: Icon(CupertinoIcons.chat_bubble)
+                ),
+                IconButton(
+                    onPressed: (){
+
+                    },
+                    icon: Icon(CupertinoIcons.paperplane)
+                ),
+              ],
+            ),
+            IconButton(
+                onPressed: (){
+
+                },
+                icon: Icon(CupertinoIcons.bookmark)
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Text("좋아요 ${feedData.likeCount}", style: TextStyle(fontWeight: FontWeight.bold),),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: RichText(text: TextSpan(
+            children: [
+              TextSpan(text: feedData.userName, style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: feedData.content),
+            ],
+            style: TextStyle(color: Colors.black)
+          )),
         )
       ],
     );
