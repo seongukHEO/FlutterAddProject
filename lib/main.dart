@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_instagram_2/user_chat.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'body.dart';
@@ -65,7 +66,11 @@ class _InstaCloneHomeState extends State<InstaCloneHome> {
           ),
           IconButton(
               onPressed: (){
-                print("tab DM");
+                setState(() {
+                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                    return UserChat();
+                  }));
+                });
               },
               icon: Icon(CupertinoIcons.paperplane, size: 32,)
           ),
