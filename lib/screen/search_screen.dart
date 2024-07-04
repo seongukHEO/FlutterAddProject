@@ -54,7 +54,7 @@ class SearchTextBar extends StatelessWidget {
 }
 
 final gridItems = List.generate(30, (index){
-  Colors.green.shade300;
+  return Colors.green.shade300;
 });
 
 
@@ -65,10 +65,12 @@ class SearchGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.count(
       padding: EdgeInsets.zero,
-        children: [
-          gridItems.map((color) => Container(color: color)).toList(),
-        ],
-        crossAxisCount: crossAxisCount
+        mainAxisSpacing: 4,
+        children: gridItems.map((e) => Container(color: e,),).toList(),
+        crossAxisSpacing: 4,
+        crossAxisCount: 3,
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
     );
   }
 }
