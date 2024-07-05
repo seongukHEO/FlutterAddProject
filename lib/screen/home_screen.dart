@@ -111,11 +111,19 @@ class FeedList extends StatelessWidget {
   }
 }
 
-class FeedItem extends StatelessWidget {
+class FeedItem extends StatefulWidget {
 
   final FeedData feedData;
 
-  const FeedItem({required this.feedData,super.key});
+  const FeedItem({required this.feedData, super.key});
+
+  @override
+  State<FeedItem> createState() => _FeedItemState();
+}
+
+class _FeedItemState extends State<FeedItem> {
+  bool? checkFavorite = false;
+  bool? checkRecord = false;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +144,7 @@ class FeedItem extends StatelessWidget {
                   ),
                   ),
                   SizedBox(width: 8,),
-                  Text(feedData.userName)
+                  Text(widget.feedData.userName)
                 ],
               ),
               Icon(Icons.more_vert)
@@ -156,9 +164,11 @@ class FeedItem extends StatelessWidget {
               children: [
                 IconButton(
                     onPressed: (){
-
+                      setState(() {
+                        checkFavorite = !checkFavorite!;
+                      });
                     },
-                    icon: Icon(Icons.favorite_outline)
+                    icon: Icon(checkFavorite! ?Icons.favorite : Icons.favorite_outline),
                 ),
                 IconButton(
                     onPressed: (){
@@ -176,22 +186,24 @@ class FeedItem extends StatelessWidget {
             ),
             IconButton(
                 onPressed: (){
-
+                  setState(() {
+                    checkRecord = !checkRecord!;
+                  });
                 },
-                icon: Icon(CupertinoIcons.bookmark)
+                icon: Icon(checkRecord! ?CupertinoIcons.bookmark_fill : CupertinoIcons.bookmark)
             ),
           ],
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Text("좋아요 ${feedData.likeCount}", style: TextStyle(fontWeight: FontWeight.bold),),
+          child: Text("좋아요 ${widget.feedData.likeCount}", style: TextStyle(fontWeight: FontWeight.bold),),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           child: RichText(text: TextSpan(
             children: [
-              TextSpan(text: feedData.userName, style: TextStyle(fontWeight: FontWeight.bold)),
-              TextSpan(text: feedData.content),
+              TextSpan(text: widget.feedData.userName, style: TextStyle(fontWeight: FontWeight.bold)),
+              TextSpan(text: widget.feedData.content),
             ],
             style: TextStyle(color: Colors.black)
           )),
