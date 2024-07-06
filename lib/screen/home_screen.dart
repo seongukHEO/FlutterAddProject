@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../friend_story.dart';
 import '../user_chat.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,16 +21,30 @@ class HomeScreen extends StatelessWidget {
 }
 
 
-class StoryArea extends StatelessWidget {
+class StoryArea extends StatefulWidget {
   const StoryArea({super.key});
 
+  @override
+  State<StoryArea> createState() => _StoryAreaState();
+}
+
+class _StoryAreaState extends State<StoryArea> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       //수평적으로 움직이는 스크롤
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: List.generate(10, (index) => UserStory(userName: "User $index"))
+        children: List.generate(10, (index) => GestureDetector(
+          onTap: (){
+            setState(() {
+              Navigator.push(context, MaterialPageRoute(builder: (context){
+                return FriendStory(index : index);
+              }));
+            });
+          },
+            child: UserStory(userName: "User $index")
+        ))
       ),
     );
   }
